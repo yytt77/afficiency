@@ -1,28 +1,28 @@
 import React from 'react';
 
-const Dashboard = ({ agents, policies }) => {
+const Dashboard = ({ seller, items }) => {
   return (
     <div>
-      {agents.map((agent) => (
+      {seller.map((agent) => (
         <div key={agent.id}>
           <h2>{agent.name}</h2>
           <table>
             <thead>
               <tr>
-                <th>Policy ID</th>
-                <th>Policy Value</th>
+                <th>Item ID</th>
+                <th>Item Value</th>
                 <th>Sold Date</th>
               </tr>
             </thead>
             <tbody>
-              {agent.policiesSold
-                .map((policyId) => policies.find((policy) => policy.id === policyId))
+              {agent.soldItems
+                .map((itemId) => items.find((item) => item.id === itemId))
                 .sort((a, b) => b.value - a.value)
-                .map((policy) => (
-                  <tr key={policy.id}>
-                    <td>{policy.id}</td>
-                    <td>{policy.value}</td>
-                    <td>{policy.soldDate}</td>
+                .map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>{item.value}</td>
+                    <td>{item.soldDate}</td>
                   </tr>
                 ))}
             </tbody>

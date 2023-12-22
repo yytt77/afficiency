@@ -6,21 +6,21 @@ import CreatePolicy from './CreatePolicy';
 import PolicyFilter from './PolicyFilter';
 
 const App = () => {
-  const [agents] = useState([
-    { id: 0, age: 30, name: 'nicholas', policiesSold: [0, 2] },
-    { id: 1, age: 30, name: 'janice', policiesSold: [1, 3] },
-    { id: 2, age: 30, name: 'kelly', policiesSold: [4, 5] },
-  ]);
+    const [seller] = useState([
+        { id: 0, age: 28, name: 'Alice', soldItems: [0, 1] },
+        { id: 1, age: 32, name: 'Bob', soldItems: [2, 3] },
+        { id: 2, age: 25, name: 'Charlie', soldItems: [4, 5] },
+      ]);
 
-  const [policies, setPolicies] = useState([
-    { id: 0, value: 100, soldDate: "12-05-2000" },
-    { id: 1, value: 200, soldDate: "12-30-2000" },
-    { id: 2, value: 300, soldDate: "12-12-2000" },
-    { id: 3, value: 400, soldDate: "12-14-2000" },
-    { id: 4, value: 500, soldDate: "12-07-2000" },
-    { id: 5, value: 600, soldDate: "12-23-2000" },
-   ]);
-  const [filteredPolicies, setFilteredPolicies] = useState([]);
+      const [items, setItems] = useState([
+        { id: 0, value: 150, soldDate: '12-08-2022' },
+        { id: 1, value: 250, soldDate: '12-15-2022' },
+        { id: 2, value: 350, soldDate: '12-22-2022' },
+        { id: 3, value: 450, soldDate: '12-01-2022' },
+        { id: 4, value: 550, soldDate: '12-10-2022' },
+        { id: 5, value: 650, soldDate: '12-18-2022' },
+      ]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
 
   return (
@@ -39,15 +39,15 @@ const App = () => {
         <Routes>
             <Route
             path="/dashboard"
-            element={<Dashboard agents={agents} policies={policies} />}
+            element={<Dashboard seller={seller} items={items} />}
             />
             <Route
             path="/create-policy"
-            element={<CreatePolicy agents={agents} policies={policies} setPolicies={setPolicies} />}
+            element={<CreatePolicy seller={seller} items={items} setItems={setItems} />}
             />
             <Route
             path="/"
-            element={<PolicyFilter policies={policies} setFilteredPolicies={setFilteredPolicies} />}
+            element={<PolicyFilter items={items} filteredItems={setFilteredItems} />}
             />
         </Routes>
 

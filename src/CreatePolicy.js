@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 
-const CreatePolicy = ({ agents, policies, setPolicies }) => {
-  const [selectedAgent, setSelectedAgent] = useState(agents[0].id);
+// Utility function for formatting dates
+const formatDate = () => {
+  const date = new Date();
+  return `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
+};
+
+const CreatePolicy = ({ seller, items, setItems }) => {
+  const [selectedAgent, setSelectedAgent] = useState(seller[0].id);
   const [policyValue, setPolicyValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -20,22 +26,22 @@ const CreatePolicy = ({ agents, policies, setPolicies }) => {
   };
 
   const handleCreatePolicy = () => {
-    const newPolicyValue = Number(policyValue);
+    const newItemValue = Number(policyValue);
 
-    if (policies.some((policy) => policy.value === newPolicyValue)) {
+    if (items.some((policy) => policy.value === newItemValue)) {
       setErrorMessage('Policy with this value already exists.');
       return;
     }
 
-    const newPolicy = {
-      id: policies.length,
-      value: newPolicyValue,
-      soldDate: new Date().toLocaleDateString(),
+    const newItems = {
+      id: items.length,
+      value: newItemValue,
+      soldDate: formatDate(), // Use the utility function
     };
 
-    setPolicies([...policies, newPolicy]);
+    setItems([...items, newItems]);
 
-    setSelectedAgent(agents[0].id);
+    setSelectedAgent(seller[0].id);
     setPolicyValue('');
     setErrorMessage('');
   };
@@ -47,7 +53,7 @@ const CreatePolicy = ({ agents, policies, setPolicies }) => {
         <label>
           Select Agent:
           <select value={selectedAgent} onChange={handleAgentChange}>
-            {agents.map((agent) => (
+            {seller.map((agent) => (
               <option key={agent.id} value={agent.id}>
                 {agent.name}
               </option>

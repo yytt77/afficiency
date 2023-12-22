@@ -1,15 +1,15 @@
 import React from 'react';
 
-const PolicyFilter = ({ policies, setFilteredPolicies }) => {
+const PolicyFilter = ({ items, setFilteredItems }) => {
   const handleFilterChange = (daysAgo) => {
     const currentDate = new Date();
-    const filteredPolicies = policies.filter((policy) => {
+    const filteredPolicies = items.filter((policy) => {
       const policyDate = new Date(policy.soldDate);
       const differenceInDays = Math.floor((currentDate - policyDate) / (1000 * 60 * 60 * 24));
       return differenceInDays <= daysAgo;
     });
 
-    setFilteredPolicies(filteredPolicies);
+    setFilteredItems(filteredPolicies);
   };
 
   return (
@@ -18,7 +18,7 @@ const PolicyFilter = ({ policies, setFilteredPolicies }) => {
       <button onClick={() => handleFilterChange(3)}>Last 3 Days</button>
       <button onClick={() => handleFilterChange(7)}>Last 7 Days</button>
       <button onClick={() => handleFilterChange(12)}>Last 12 Days</button>
-      <button onClick={() => setFilteredPolicies(policies)}>Clear Filter</button>
+      <button onClick={() => setFilteredItems(items)}>Clear Filter</button>
     </div>
   );
 };
